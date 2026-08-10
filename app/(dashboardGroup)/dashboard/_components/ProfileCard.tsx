@@ -1,6 +1,7 @@
 import { getMyProfile } from "@/app/(authGroup)/auth/_actions/getMyProfile";
 import { CalendarDays, Mail, Phone, Shield, User } from "lucide-react";
 import Image from "next/image";
+import EditProfileForm from "./EditProfileForm";
 
 const ProfileCard = async () => {
   const result = await getMyProfile();
@@ -54,10 +55,13 @@ const ProfileCard = async () => {
             </div>
           )}
         </div>
-        <div className="space-y-1">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-            {user?.name}
-          </h2>
+        <div className="flex-1 space-y-1">
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              {user?.name}
+            </h2>
+            {user && <EditProfileForm user={user} />}
+          </div>
           {profile?.bio && (
             <p className="text-sm text-muted-foreground">{profile.bio}</p>
           )}

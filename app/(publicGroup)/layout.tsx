@@ -1,15 +1,17 @@
 import { AppNavBar } from "@/components/shared/AppNavBar";
+import { AppFooter } from "@/components/shared/AppFooter";
 import React from "react";
 import { getMyProfile } from "../(authGroup)/auth/_actions/getMyProfile";
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getMyProfile();
   return (
-    <div className="min-h-screen bg-muted/40">
+    <div className="min-h-screen bg-muted/40 flex flex-col">
       <AppNavBar user={user} />
-      <div className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
+      <div className="flex flex-1 items-center justify-center">
         {children}
       </div>
+      <AppFooter user={user}/>
     </div>
   );
 };

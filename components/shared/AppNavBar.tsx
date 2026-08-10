@@ -39,6 +39,9 @@ import { logout } from "@/service/logout";
 const menuItems = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Help", href: "/help" },
 ] as const;
 
 const profileMenuSections = [

@@ -6,7 +6,15 @@ import { getNewAccessToken } from "./service/getNewAccessToken";
 import { JwtPayload } from "jsonwebtoken";
 
 const AUTH_ROUTES = ["/auth/login", "/auth/register"];
-const PUBLIC_ROUTES = ["/", "/properties"];
+const PUBLIC_ROUTES = [
+  "/",
+  "/properties",
+  "/about",
+  "/contact",
+  "/blog",
+  "/help",
+  "/privacy",
+];
 
 const routeMatches = (route: string, pathName: string) =>
   pathName === route || pathName.startsWith(`${route}/`);
@@ -36,8 +44,8 @@ export async function proxy(request: NextRequest) {
     const result = await getNewAccessToken();
 
     if (result.success) {
-      const newAccessToken = result.accessToken;
-      cookieStore.set("accessToken", result.accessToken, {
+      const newAccessToken = result.data.accessToken;
+      cookieStore.set("accessToken", newAccessToken, {
         httpOnly: true,
         sameSite: "lax",
         maxAge: 60 * 60 * 24,
