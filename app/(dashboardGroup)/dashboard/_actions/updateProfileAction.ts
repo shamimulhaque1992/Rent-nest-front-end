@@ -14,15 +14,17 @@ export const updateProfileAction = async (
   _prevState: IUpdateProfileState,
   formData: FormData,
 ): Promise<IUpdateProfileState> => {
+  console.log("🚀 ~ updateProfileAction ~ userId:", userId);
   const accessToken = await validateAccessToken();
 
   const body = {
     name: (formData.get("name") as string)?.trim(),
-    email: (formData.get("email") as string)?.trim(),
+    // email: (formData.get("email") as string)?.trim(),
     avatar: (formData.get("avatar") as string)?.trim(),
     bio: (formData.get("bio") as string)?.trim(),
     phone: (formData.get("phone") as string)?.trim(),
   };
+  console.log("🚀 ~ updateProfileAction ~ body:", body)
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/users/${userId}`, {
     method: "PATCH",

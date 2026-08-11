@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,18 +25,20 @@ const initialState: IUpdateProfileState = null;
 export default function EditProfileForm({ user }: { user: IUserData }) {
   const [open, setOpen] = useState(false);
 
-  const boundAction = updateProfileAction.bind(null, user.id);
+  const boundAction = updateProfileAction.bind(null, user?.id as string);
   const [state, action, pending] = useActionState(boundAction, initialState);
 
   useEffect(() => {
-    if (!state) return;
-    if (state.success) {
+    if (state?.success === true) {
       toast.success(state.message || "Profile updated successfully!");
-      setOpen(false);
-    } else {
+      startTransition(() => {
+        setOpen(false);
+      });
+    }
+    if (state?.success === false) {
       toast.error(state.message || "Failed to update profile.");
     }
-  }, [state]);
+  }, [state?.success, state?.message]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -68,7 +70,7 @@ export default function EditProfileForm({ user }: { user: IUserData }) {
             />
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="email" className="text-sm font-medium">
               Email Address
             </Label>
@@ -80,7 +82,7 @@ export default function EditProfileForm({ user }: { user: IUserData }) {
               placeholder="name@example.com"
               className="h-10"
             />
-          </div>
+          </div> */}
 
           <div className="space-y-2">
             <Label htmlFor="avatar" className="text-sm font-medium">
