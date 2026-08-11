@@ -36,6 +36,8 @@ import { IUser } from "@/lib/types";
 import { getAvatarNameFromFullName } from "@/service/appHelper";
 import { logout } from "@/service/logout";
 
+import { ModeToggle } from "@/components/shared/ModeToggle";
+
 const menuItems = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
@@ -115,7 +117,9 @@ export function AppNavBar({ user }: { user: IUser }) {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <ModeToggle />
+
           {user.success ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -199,7 +203,7 @@ export function AppNavBar({ user }: { user: IUser }) {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background px-4 py-3 flex flex-col gap-1">
+        <div className="md:hidden border-t bg-background px-4 py-3 flex flex-col gap-2">
           {menuItems.map((item) => (
             <Link
               key={item.href}
@@ -210,6 +214,10 @@ export function AppNavBar({ user }: { user: IUser }) {
               {item.label}
             </Link>
           ))}
+          <div className="pt-2 border-t flex items-center justify-between px-3">
+            <span className="text-xs font-medium text-muted-foreground">Theme</span>
+            <ModeToggle showLabels />
+          </div>
         </div>
       )}
     </header>

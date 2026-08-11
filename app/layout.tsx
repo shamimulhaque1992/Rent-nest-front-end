@@ -37,6 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -45,6 +47,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         "h-full",
         "antialiased",
@@ -55,10 +58,16 @@ export default async function RootLayout({
         ralewayHeading.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <Toaster position="top-right" richColors />
-
-        {children}
+      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-200">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster position="top-right" richColors />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
