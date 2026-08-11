@@ -14,7 +14,6 @@ export const updateProfileAction = async (
   _prevState: IUpdateProfileState,
   formData: FormData,
 ): Promise<IUpdateProfileState> => {
-  console.log("🚀 ~ updateProfileAction ~ userId:", userId);
   const accessToken = await validateAccessToken();
 
   const body = {
@@ -24,7 +23,6 @@ export const updateProfileAction = async (
     bio: (formData.get("bio") as string)?.trim(),
     phone: (formData.get("phone") as string)?.trim(),
   };
-  console.log("🚀 ~ updateProfileAction ~ body:", body)
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/users/${userId}`, {
     method: "PATCH",
