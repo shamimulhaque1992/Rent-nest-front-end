@@ -11,6 +11,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { getTenantStat } from "../_actions/getTenantStat";
+import TenantDashboardCharts from "./TenantDashboardCharts";
 
 const TenantDashboardStatComponent = async () => {
   const result = await getTenantStat();
@@ -100,7 +101,7 @@ const TenantDashboardStatComponent = async () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {statCards.map((card) => {
           const Icon = card.icon;
@@ -125,6 +126,14 @@ const TenantDashboardStatComponent = async () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Charts Section */}
+      <div>
+        <h2 className="text-base font-semibold text-slate-800 dark:text-slate-200 mb-4">
+          Analytics Overview
+        </h2>
+        <TenantDashboardCharts stats={stats ?? {}} />
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { getLandLordStat } from "../_actions/getLandLordStat";
+import LandLordDashboardCharts from "./LandLordDashboardCharts";
 
 const LandLordDashboardStatComponent = async () => {
   const result = await getLandLordStat();
@@ -107,7 +108,7 @@ const LandLordDashboardStatComponent = async () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {statCards.map((card) => {
@@ -133,6 +134,14 @@ const LandLordDashboardStatComponent = async () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Charts Section */}
+      <div>
+        <h2 className="text-base font-semibold text-slate-800 dark:text-slate-200 mb-4">
+          Analytics Overview
+        </h2>
+        <LandLordDashboardCharts stats={stats ?? {}} />
       </div>
     </div>
   );
