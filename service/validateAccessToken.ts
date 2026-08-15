@@ -28,7 +28,7 @@ export const validateAccessToken = async () => {
 
     if (result.success) {
       const newAccessToken = result.data.accessToken;
-      cookieStore.set("accessToken", result.data.accessToken, {
+      cookieStore.set("accessToken", newAccessToken, {
         httpOnly: true,
         maxAge: 60 * 60 * 24,
         sameSite: "lax",
